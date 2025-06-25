@@ -50,6 +50,7 @@
         <h2>Tropical linear systems of degree 2 on an interval</h2>
 
         <!-- First image containing the interval and two chips -->
+        <div style="touch-action: none;">
         <svg width="500" height="150" viewBox="-0.05 -0.2 1.1 0.4" id="svgCanvas">
             <!-- The Horizontal Line -->
             <line id="line" x1="0" y1="0" x2="1" y2="0" stroke="black" stroke-width="0.01" />
@@ -58,10 +59,11 @@
             <circle id="P1" class="draggable" cx="0" cy="0" r="0.03" stroke-width="0.005" stroke="white" fill="red" />
             <circle id="P2" class="draggable" cx="1" cy="0" r="0.03" stroke-width="0.005" stroke="white" fill="red" />
         </svg>
+        </div>
 
         <br/>
         
-        <div style="margin:0px auto; width:800px;  display:flex;">
+        <div style="margin:0px auto; width:800px;  display:flex; touch-action:none;">
         <div style="float:left; margin:0;width:50%;">
 
         <!-- Second image containing the visualization of the raitonal funciton -->
@@ -682,6 +684,7 @@
 
             // Event listener for dragging along the triangle
             function triangleMouseMove(evt) {
+                evt.preventDefault();
                 const coord = getMousePosition(evt, triangle.ownerSVGElement);
                 const clampedCoord = clampToTriangle(coord);
                 setDivisorCoordinates(divisor, clampedCoord);
