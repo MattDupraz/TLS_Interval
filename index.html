@@ -465,7 +465,7 @@
                     constCoeff: 0 });
 
                 if (draggable) {
-                    div.addEventListener("mousedown", divisorGrab);
+                    div.addEventListener("pointerdown", divisorGrab);
                 }
             }
 
@@ -514,7 +514,7 @@
                 handle.style.stroke = "black";
                 handle.style.strokeWidth = 0.005;
                 handle.style.cursor = "grab";
-                handle.addEventListener("mousedown", handleGrab);
+                handle.addEventListener("pointerdown", handleGrab);
 
                 triangleSvg.insertBefore(handle, divisor);
 
@@ -537,10 +537,10 @@
 
 
             // Register click events (defined below)
-            triangle.addEventListener('mousedown', triangleMouseDown);
-            divisor.addEventListener('mousedown', triangleMouseDown);
-            point1.addEventListener('mousedown', startDrag);
-            point2.addEventListener('mousedown', startDrag);
+            triangle.addEventListener('pointerdown', triangleMouseDown);
+            divisor.addEventListener('pointerdown', triangleMouseDown);
+            point1.addEventListener('pointerdown', startDrag);
+            point2.addEventListener('pointerdown', startDrag);
 
             triangleSvg.addEventListener("contextmenu", evt => evt.preventDefault());
             point1.addEventListener("contextmenu", evt => evt.preventDefault());
@@ -574,8 +574,8 @@
                 if (evt.button == 0) {
                     selectedDivisor = evt.target;
                     selectedDivisor.style.cursor = "grabbing";
-                    document.addEventListener("mousemove", divisorMove);
-                    document.addEventListener("mouseup", divisorRelease);
+                    document.addEventListener("pointermove", divisorMove);
+                    document.addEventListener("pointerup", divisorRelease);
                 } else if (evt.button == 2) {
                     n = generators.size - 1
                     for (let i = 0; i < n; i++) {
@@ -605,16 +605,16 @@
                 selectedDivisor.style.cursor = "grab";
                 selectedDivisor = null;
 
-                document.removeEventListener('mousemove', divisorMove);
-                document.removeEventListener('mouseup', divisorRelease);
+                document.removeEventListener('pointermove', divisorMove);
+                document.removeEventListener('pointerup', divisorRelease);
             }
 
             function handleGrab(evt) {
                 evt.preventDefault();
                 if (evt.button == 0) {
                     handle.style.cursor = "grabbing";
-                    document.addEventListener("mousemove", handleMove);
-                    document.addEventListener("mouseup", handleRelease);
+                    document.addEventListener("pointermove", handleMove);
+                    document.addEventListener("pointerup", handleRelease);
                 }
             }
 
@@ -642,16 +642,16 @@
             }
 
             function handleRelease(evt) {
-                document.removeEventListener('mousemove', handleMove);
-                document.removeEventListener('mouseup', handleRelease);
+                document.removeEventListener('pointermove', handleMove);
+                document.removeEventListener('pointerup', handleRelease);
             }
 
             // Event listener to clicks on the triangle
             function triangleMouseDown(evt) {
                 evt.preventDefault();
                 if (evt.button == 0) {
-                    document.addEventListener("mousemove", triangleMouseMove);
-                    document.addEventListener("mouseup", triangleMouseUp);
+                    document.addEventListener("pointermove", triangleMouseMove);
+                    document.addEventListener("pointerup", triangleMouseUp);
                     triangleMouseMove(evt); // Update the divisor immediately
                 } else if (evt.button == 2) {
                     const coord = getMousePosition(evt, triangle.ownerSVGElement);
@@ -699,8 +699,8 @@
 
             // Event listener when mouse is released
             function triangleMouseUp(evt) {
-                document.removeEventListener("mousemove", triangleMouseMove);
-                document.removeEventListener("mouseup", triangleMouseUp);
+                document.removeEventListener("pointermove", triangleMouseMove);
+                document.removeEventListener("pointerup", triangleMouseUp);
             }
 
             // Selected chip on the interval
@@ -712,8 +712,8 @@
                 selectedPoint = evt.target;
                 selectedPoint.style.cursor = "grabbing";
 
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('mouseup', endDrag);
+                document.addEventListener("pointermove", drag);
+                document.addEventListener("pointerup", endDrag);
             }
 
             function drag(evt) {
@@ -732,8 +732,8 @@
                 selectedPoint.style.cursor = "grab";
                 selectedPoint = null;
 
-                document.removeEventListener('mousemove', drag);
-                document.removeEventListener('mouseup', endDrag);
+                document.removeEventListener("pointermove", drag);
+                document.removeEventListener("pointerup", endDrag);
             }
 
             // Helper value to retrieve chip coordinate along the interval
